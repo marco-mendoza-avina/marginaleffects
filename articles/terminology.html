@@ -154,10 +154,10 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/marginaleffects/">marginaleffects</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   rowid     type term         dydx   std.error predicted_response  x</span>
-<span class="co">#&gt; 1     1 response    x  4.000933129 0.002974050       -4.004992078 -2</span>
-<span class="co">#&gt; 2     2 response    x  0.002351507 0.001367423       -0.001507513  0</span>
-<span class="co">#&gt; 3     3 response    x -3.996230115 0.002986224       -3.995186191  2</span></code></pre></div>
+<span class="co">#&gt;   rowid     type term        dydx   std.error predicted_response  x</span>
+<span class="co">#&gt; 1     1 response    x  4.00425192 0.003006152        -3.99428464 -2</span>
+<span class="co">#&gt; 2     2 response    x  0.00106354 0.001377339         0.01123098  0</span>
+<span class="co">#&gt; 3     3 response    x -4.00212484 0.002996282        -3.98963017  2</span></code></pre></div>
 <p>These numerical results are very close to the analytical truth:</p>
 <p><span class="math display">\[\begin{align*}
 \partial y/\partial x = -2x\\
@@ -179,8 +179,8 @@
 <p>By default, the <code>marginaleffects</code> function returns predicted/estimated responses for each of the observations in the dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
-
-<span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span> |&gt; <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">mfx</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mfx</span><span class="op">)</span>
 <span class="co">#&gt;   rowid     type term        dydx  std.error predicted_response  mpg  hp cyl</span>
 <span class="co">#&gt; 1     1 response   hp -0.02403883 0.01540789           20.03819 21.0 110   6</span>
 <span class="co">#&gt; 2     2 response   hp -0.02403883 0.01540789           20.03819 21.0 110   6</span>
