@@ -154,10 +154,10 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/marginaleffects/">marginaleffects</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   rowid     type term          dydx   std.error predicted_response  x</span>
-<span class="co">#&gt; 1     1 response    x  3.9975343023 0.002982597       -4.007116098 -2</span>
-<span class="co">#&gt; 2     2 response    x  0.0000998222 0.001368873       -0.009282102  0</span>
-<span class="co">#&gt; 3     3 response    x -3.9973346579 0.002992050       -4.006317066  2</span></code></pre></div>
+<span class="co">#&gt;   rowid     type term         dydx   std.error predicted_response  x</span>
+<span class="co">#&gt; 1     1 response    x  3.996943023 0.002983629       -3.993101163 -2</span>
+<span class="co">#&gt; 2     2 response    x -0.002391293 0.001370009        0.001650535  0</span>
+<span class="co">#&gt; 3     3 response    x -4.001725609 0.002994496       -4.002266400  2</span></code></pre></div>
 <p>These numerical results are very close to the analytical truth:</p>
 <p><span class="math display">\[\begin{align*}
 \partial y/\partial x = -2x\\
