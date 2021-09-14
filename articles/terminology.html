@@ -155,9 +155,9 @@
 
 <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt;   rowid     type term          dydx   std.error predicted_response  x</span>
-<span class="co">#&gt; 1     1 response    x  4.0004835127 0.002978172        -3.99437489 -2</span>
-<span class="co">#&gt; 2     2 response    x -0.0001268735 0.001368215         0.00618178  0</span>
-<span class="co">#&gt; 3     3 response    x -4.0007372597 0.002976923        -3.99448232  2</span></code></pre></div>
+<span class="co">#&gt; 1     1 response    x  3.9988534491 0.002985145      -3.9978379421 -2</span>
+<span class="co">#&gt; 2     2 response    x -0.0007987329 0.001369308       0.0004167567  0</span>
+<span class="co">#&gt; 3     3 response    x -4.0004509148 0.002982518      -4.0006329084  2</span></code></pre></div>
 <p>These numerical results are very close to the analytical truth:</p>
 <p><span class="math display">\[\begin{align*}
 \partial y/\partial x = -2x\\
