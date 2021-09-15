@@ -154,10 +154,10 @@
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/marginaleffects/">marginaleffects</a></span><span class="op">)</span>
 
 <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   rowid     type term          dydx   std.error predicted_response  x</span>
-<span class="co">#&gt; 1     1 response    x  4.0001460185 0.002987683       -3.995578308 -2</span>
-<span class="co">#&gt; 2     2 response    x -0.0005928946 0.001375339        0.004174853  0</span>
-<span class="co">#&gt; 3     3 response    x -4.0013318077 0.002999019       -3.997549813  2</span></code></pre></div>
+<span class="co">#&gt;   rowid     type term          dydx   std.error  x    predicted</span>
+<span class="co">#&gt; 1     1 response    x  3.997326e+00 0.002998763 -2 -4.006634328</span>
+<span class="co">#&gt; 2     2 response    x -4.069095e-05 0.001374493  0 -0.009149618</span>
+<span class="co">#&gt; 3     3 response    x -3.997407e+00 0.002995451  2 -4.006397355</span></code></pre></div>
 <p>These numerical results are very close to the analytical truth:</p>
 <p><span class="math display">\[\begin{align*}
 \partial y/\partial x = -2x\\
@@ -181,13 +181,13 @@
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
 <span class="va">mfx</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">mfx</span><span class="op">)</span>
-<span class="co">#&gt;   rowid     type term        dydx  std.error predicted_response  mpg  hp cyl</span>
-<span class="co">#&gt; 1     1 response   hp -0.02403883 0.01540789           20.03819 21.0 110   6</span>
-<span class="co">#&gt; 2     2 response   hp -0.02403883 0.01540789           20.03819 21.0 110   6</span>
-<span class="co">#&gt; 3     3 response   hp -0.02403883 0.01540790           26.41451 22.8  93   4</span>
-<span class="co">#&gt; 4     4 response   hp -0.02403883 0.01540789           20.03819 21.4 110   6</span>
-<span class="co">#&gt; 5     5 response   hp -0.02403883 0.01540745           15.92247 18.7 175   8</span>
-<span class="co">#&gt; 6     6 response   hp -0.02403883 0.01540789           20.15839 18.1 105   6</span></code></pre></div>
+<span class="co">#&gt;   rowid     type         term      dydx std.error  mpg  hp cyl predicted</span>
+<span class="co">#&gt; 1     1 response factor(cyl)6 -5.967655  1.639278 21.0 110   6  20.03819</span>
+<span class="co">#&gt; 2     2 response factor(cyl)6 -5.967655  1.639278 21.0 110   6  20.03819</span>
+<span class="co">#&gt; 3     3 response factor(cyl)6 -5.967655  1.639278 22.8  93   4  26.41451</span>
+<span class="co">#&gt; 4     4 response factor(cyl)6 -5.967655  1.639278 21.4 110   6  20.03819</span>
+<span class="co">#&gt; 5     5 response factor(cyl)6 -5.967655  1.639278 18.7 175   8  15.92247</span>
+<span class="co">#&gt; 6     6 response factor(cyl)6 -5.967655  1.639278 18.1 105   6  20.15839</span></code></pre></div>
 <p>We can also request these responses for specific values of the regressors, using the <code>typical</code> function, in the <code>newdata</code> argument. By default, <code>typical</code> will set any variable which is not explicitly specify to its mean value. For example,</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span>, model <span class="op">=</span> <span class="va">mod</span><span class="op">)</span>
@@ -198,11 +198,17 @@
 <p>This gives us 3 “typical observations” – or “margins” – at which we can do prediction. Using the <code>marginaleffects</code> function to extract those predictions gives us:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt;   rowid     type term        dydx std.error predicted_response       hp cyl</span>
-<span class="co">#&gt; 1     1 response   hp -0.02403883 0.0154079           25.12392 146.6875   4</span>
-<span class="co">#&gt; 2     2 response   hp -0.02403883 0.0154079           19.15627 146.6875   6</span>
-<span class="co">#&gt; 3     3 response   hp -0.02403883 0.0154079           16.60307 146.6875   8</span></code></pre></div>
-<p>The <code>emmeans</code> package refers to the set of observations that we just used to compute predicted values as a “reference grid,” but the idea is the same. Indeed, our <code>predicted_response</code> values (25.1, 19.2, 16.6) are exactly identical to the EMMs computed by the <code>emmeans</code> package:</p>
+<span class="co">#&gt;   rowid     type         term        dydx std.error       hp cyl predicted</span>
+<span class="co">#&gt; 1     1 response factor(cyl)6 -5.96765508 1.6392776 146.6875   4  25.12392</span>
+<span class="co">#&gt; 2     2 response factor(cyl)6 -5.96765508 1.6392776 146.6875   6  19.15627</span>
+<span class="co">#&gt; 3     3 response factor(cyl)6 -5.96765508 1.6392776 146.6875   8  16.60307</span>
+<span class="co">#&gt; 4     1 response factor(cyl)8 -8.52085075 2.3260749 146.6875   4  25.12392</span>
+<span class="co">#&gt; 5     2 response factor(cyl)8 -8.52085075 2.3260749 146.6875   6  19.15627</span>
+<span class="co">#&gt; 6     3 response factor(cyl)8 -8.52085075 2.3260749 146.6875   8  16.60307</span>
+<span class="co">#&gt; 7     1 response           hp -0.02403883 0.0154079 146.6875   4  25.12392</span>
+<span class="co">#&gt; 8     2 response           hp -0.02403883 0.0154079 146.6875   6  19.15627</span>
+<span class="co">#&gt; 9     3 response           hp -0.02403883 0.0154079 146.6875   8  16.60307</span></code></pre></div>
+<p>The <code>emmeans</code> package refers to the set of observations that we just used to compute predicted values as a “reference grid,” but the idea is the same. Indeed, our <code>predicted_response</code> values () are exactly identical to the EMMs computed by the <code>emmeans</code> package:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rvlenth/emmeans">emmeans</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/pkg/emmeans/man/emmeans.html">emmeans</a></span><span class="op">(</span><span class="va">mod</span>, specs <span class="op">=</span> <span class="st">"cyl"</span><span class="op">)</span>
