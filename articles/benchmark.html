@@ -107,7 +107,7 @@
 <span class="op">}</span>
 
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/bench/man/press.html">press</a></span><span class="op">(</span>
-    N <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">400</span>, <span class="fl">800</span>, <span class="fl">1600</span>, <span class="fl">3200</span>, <span class="fl">6400</span><span class="op">)</span>,
+    N <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">50</span>, <span class="fl">100</span>, <span class="fl">200</span>, <span class="fl">400</span>, <span class="fl">800</span>, <span class="fl">1500</span>, <span class="fl">5000</span>, <span class="fl">10000</span><span class="op">)</span>,
     unit_ses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>,
     <span class="op">{</span>
     <span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/simulate.html">simulate</a></span><span class="op">(</span><span class="va">N</span><span class="op">)</span>
@@ -122,22 +122,19 @@
 <pre><code>## Running with:
 ##        N unit_ses</code></pre>
 <pre><code>##  1    25 FALSE</code></pre>
-<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
 <pre><code>##  2    50 FALSE</code></pre>
 <pre><code>##  3   100 FALSE</code></pre>
 <pre><code>##  4   200 FALSE</code></pre>
 <pre><code>##  5   400 FALSE</code></pre>
-<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
 <pre><code>##  6   800 FALSE</code></pre>
-<pre><code>##  7  1600 FALSE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre><code>##  8  3200 FALSE</code></pre>
+<pre><code>##  7  1500 FALSE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre><code>##  9  6400 FALSE</code></pre>
+<pre><code>##  8  5000 FALSE</code></pre>
+<pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
+<pre><code>##  9 10000 FALSE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
 <pre><code>## 10    25 TRUE</code></pre>
-<pre><code>## Warning: glm.fit: algorithm did not converge</code></pre>
-<pre><code>## Warning: glm.fit: fitted probabilities numerically 0 or 1 occurred</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
 <pre><code>## 11    50 TRUE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
@@ -149,19 +146,20 @@
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
 <pre><code>## 15   800 TRUE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre><code>## 16  1600 TRUE</code></pre>
+<pre><code>## 16  1500 TRUE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre><code>## 17  3200 TRUE</code></pre>
+<pre><code>## 17  5000 TRUE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<pre><code>## 18  6400 TRUE</code></pre>
+<pre><code>## 18 10000 TRUE</code></pre>
 <pre><code>## Warning: Some expressions had a GC in every iteration; so filtering is disabled.</code></pre>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span><span class="op">$</span><span class="va">pkg</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">expression</span><span class="op">)</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span><span class="va">N</span>, <span class="va">median</span>, linetype <span class="op">=</span> <span class="va">pkg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
     <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">unit_ses</span>, scales <span class="op">=</span> <span class="st">"free_y"</span><span class="op">)</span> <span class="op">+</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p><img src="benchmark_files/figure-html/unnamed-chunk-1-1.png" width="700"></p>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_minimal</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></code></pre></div>
+<p><img src="benchmark_files/figure-html/unnamed-chunk-2-1.png" width="700"></p>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
