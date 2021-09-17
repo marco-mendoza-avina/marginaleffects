@@ -2,6 +2,7 @@ tmp <- mtcars
 tmp$am <- as.logical(tmp$am)
 mod <- lm(mpg ~ hp + wt + factor(cyl) + am, data = tmp)
 
+
 ########################
 #  variables argument  #
 ########################
