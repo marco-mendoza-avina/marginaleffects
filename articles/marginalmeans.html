@@ -80,9 +80,9 @@
     
 <p>In the context of this package, a “Marginal Mean” (MM) is defined as:</p>
 <blockquote>
-<p>The reponse predicted by a model for some combination (a.k.a. “reference grid”) of the regressors’ values, typically their means or factor levels.</p>
+<p>The reponse predicted by a model for some combination of the regressors’ values, such as their means or factor levels (a.k.a. “reference grid”).</p>
 </blockquote>
-<p>A marginal mean is thus a regression-adjusted mean of the response variable, for given values of the predictors. This differs from “Fitted Values” (a.k.a. “Predictions”) because the combination of regressor values being consider do not necessarily correspond to the actual values observed in the dataset (although it could).</p>
+<p>A marginal mean is thus a regression-adjusted mean of the response variable, for given values of the predictors. This differs from “Fitted Values” (a.k.a. “Predictions”) because the combination of regressor values under consideration does not necessarily correspond to any specific observation in the dataset (although it could).</p>
 <p>By default, the <code>marginalmeans</code> function returns predicted/estimated responses for each of the observations in the dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/marginaleffects/">marginaleffects</a></span><span class="op">)</span>
@@ -91,7 +91,7 @@
 
 <span class="fu"><a href="../reference/marginalmeans.html">marginalmeans</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
 <span class="co">#&gt;       type predicted std.error conf.low conf.high       hp cyl</span>
-<span class="co">#&gt; 1 response  25.12392  1.368888 22.31988  27.92796 146.6875   8</span></code></pre></div>
+<span class="co">#&gt; 1 response  16.60307  1.278754 13.98366  19.22248 146.6875   8</span></code></pre></div>
 <p>Unless otherwise instructed, <code>marginalmeans</code> calculates regression-adjusted predicted values for a unit with all regressors set at their means or modes. In most cases, this is too limiting, and researchers will want to specify a grid of “typical” values over which to compute marginal means.</p>
 <div id="typical-marginal-means" class="section level1">
 <h1 class="hasAnchor">
@@ -285,11 +285,11 @@ hp
 <div id="prediction-types" class="section level1">
 <h1 class="hasAnchor">
 <a href="#prediction-types" class="anchor"></a>Prediction types</h1>
-<p>The <code>marginalmeans</code> function computes model-adjusted means on the scale of the output of the <code><a href="https://rdrr.io/r/stats/predict.html">predict(model)</a></code> function. By default, <code>predict</code> produces predictions on the <code>"response"</code> scale, so the marginal means should be interpreted on that scale. However, users can pass a string or a vector of strings to the <code>predict_type</code> argument, and <code>marginalmeans</code> will consider different outcomes.</p>
+<p>The <code>marginalmeans</code> function computes model-adjusted means on the scale of the output of the <code><a href="https://rdrr.io/r/stats/predict.html">predict(model)</a></code> function. By default, <code>predict</code> produces predictions on the <code>"response"</code> scale, so the marginal means should be interpreted on that scale. However, users can pass a string or a vector of strings to the <code>type</code> argument, and <code>marginalmeans</code> will consider different outcomes.</p>
 <p>Typical values include <code>"response"</code> and <code>"link"</code>, but users should refer to the documentaiton of the <code>predict</code> of the package they used to fit the model to know what values are allowable. documentation.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/glm.html">glm</a></span><span class="op">(</span><span class="va">am</span> <span class="op">~</span> <span class="va">mpg</span>, family <span class="op">=</span> <span class="va">binomial</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
-<span class="fu"><a href="../reference/marginalmeans.html">marginalmeans</a></span><span class="op">(</span><span class="va">mod</span>, predict_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"link"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/marginalmeans.html">marginalmeans</a></span><span class="op">(</span><span class="va">mod</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"response"</span>, <span class="st">"link"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Users who need more control over the type of marginal means to compute, including a host of options for back-transformation, may want to consider the <a href="https://cran.r-project.org/web/packages/emmeans/index.html"><code>emmeans</code> package.</a></p>
 </div>
   </div>
