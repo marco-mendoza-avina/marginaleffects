@@ -85,7 +85,10 @@
 <p>A marginal mean is thus a regression-adjusted mean of the response variable, for given values of the predictors. This differs from “Fitted Values” (a.k.a. “Predictions”) because the combination of regressor values being consider do not necessarily correspond to the actual values observed in the dataset (although it could).</p>
 <p>By default, the <code>marginalmeans</code> function returns predicted/estimated responses for each of the observations in the dataset:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://vincentarelbundock.github.io/marginaleffects/">marginaleffects</a></span><span class="op">)</span>
+
+<span class="va">mod</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">hp</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>
+
 <span class="fu"><a href="../reference/marginalmeans.html">marginalmeans</a></span><span class="op">(</span><span class="va">mod</span><span class="op">)</span>
 <span class="co">#&gt;       type predicted std.error conf.low conf.high       hp cyl</span>
 <span class="co">#&gt; 1 response  25.12392  1.368888 22.31988  27.92796 146.6875   8</span></code></pre></div>
@@ -93,7 +96,7 @@
 <div id="typical-marginal-means" class="section level1">
 <h1 class="hasAnchor">
 <a href="#typical-marginal-means" class="anchor"></a>Typical Marginal Means</h1>
-<p>There are two main ways to select the reference grid over we want to compute marginal means. The first is using the <code>variables</code> argument. The second is with the <code>newdata</code> argument and the <a href="reference/typical.html"><code>typical()</code> function</a> that we already introduced in the <a href="articles/mfx.html">marginal effects vignette.</a></p>
+<p>There are two main ways to select the reference grid over which we want to compute marginal means. The first is using the <code>variables</code> argument. The second is with the <code>newdata</code> argument and the <a href="reference/typical.html"><code>typical()</code> function</a> that we already introduced in the <a href="articles/mfx.html">marginal effects vignette.</a></p>
 <div id="variables-levels-and-tukeys-5-numbers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#variables-levels-and-tukeys-5-numbers" class="anchor"></a><code>variables</code>: Levels and Tukey’s 5 numbers</h2>
@@ -116,7 +119,7 @@
 <span class="co">#&gt; 13 response  14.62945 3.4865450  7.487590  21.77132   6 335</span>
 <span class="co">#&gt; 14 response  20.59711 4.0024363 12.398490  28.79573   4 335</span>
 <span class="co">#&gt; 15 response  12.07626 2.1126445  7.748702  16.40381   8 335</span></code></pre></div>
-<p>The <code>data.frame</code> produced by <code>marginalmeans</code> is “tidy”, which makes it easy to manipulate with standard commands:</p>
+<p>The <code>data.frame</code> produced by <code>marginalmeans</code> is “tidy”, which makes it easy to manipulate with other <code>R</code> packages and functions:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://haozhu233.github.io/kableExtra/">kableExtra</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>

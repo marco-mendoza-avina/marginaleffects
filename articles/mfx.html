@@ -143,12 +143,12 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mfx</span><span class="op">)</span>
 <span class="co">#&gt; Average marginal effects </span>
-<span class="co">#&gt;       type              Term   Effect Std. Error  z value Pr(&gt;|z|)    2.5 %</span>
-<span class="co">#&gt; 1 response    bill_length_mm -0.00512    0.00353 -1.45029  0.14698 -0.01204</span>
-<span class="co">#&gt; 2 response flipper_length_mm  0.02189    0.00122 17.92473  &lt; 2e-16  0.01950</span>
-<span class="co">#&gt;    97.5 %</span>
-<span class="co">#&gt; 1 0.00180</span>
-<span class="co">#&gt; 2 0.02428</span>
+<span class="co">#&gt;       type              Term   Effect Std. Error z value Pr(&gt;|z|)    2.5 %</span>
+<span class="co">#&gt; 1 response    bill_length_mm -0.00512   0.003530   -1.45  0.14698 -0.01204</span>
+<span class="co">#&gt; 2 response flipper_length_mm  0.02189   0.001221   17.92  &lt; 2e-16  0.01950</span>
+<span class="co">#&gt;     97.5 %</span>
+<span class="co">#&gt; 1 0.001799</span>
+<span class="co">#&gt; 2 0.024284</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model type:  glm </span>
 <span class="co">#&gt; Prediction type:  response</span></code></pre></div>
@@ -253,12 +253,12 @@
 <span class="fu"><a href="../reference/marginaleffects.html">marginaleffects</a></span><span class="op">(</span><span class="va">mod</span>, newdata <span class="op">=</span> <span class="fu"><a href="../reference/typical.html">typical</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>  <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>truth <span class="op">=</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">4</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span> <span class="op">%&gt;%</span>
     <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">dydx</span>, <span class="va">truth</span><span class="op">)</span>
-<span class="co">#&gt;         dydx truth</span>
-<span class="co">#&gt; 1 -7.0177115    -7</span>
-<span class="co">#&gt; 2 -3.0110286    -3</span>
-<span class="co">#&gt; 3  0.9956543     1</span>
-<span class="co">#&gt; 4  5.0023372     5</span>
-<span class="co">#&gt; 5  9.0090200     9</span></code></pre></div>
+<span class="co">#&gt;        dydx truth</span>
+<span class="co">#&gt; 1 -6.990610    -7</span>
+<span class="co">#&gt; 2 -2.992628    -3</span>
+<span class="co">#&gt; 3  1.005354     1</span>
+<span class="co">#&gt; 4  5.003336     5</span>
+<span class="co">#&gt; 5  9.001319     9</span></code></pre></div>
 <p>We can also plot the result with the <code>plot_cme</code> function (see section below):</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/plot_cme.html">plot_cme</a></span><span class="op">(</span><span class="va">mod</span>, effect <span class="op">=</span> <span class="st">"x"</span>, condition <span class="op">=</span> <span class="st">"x"</span><span class="op">)</span></code></pre></div>
@@ -276,8 +276,8 @@
 <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">mfx</span><span class="op">)</span>
 <span class="co">#&gt; Average marginal effects </span>
 <span class="co">#&gt;       type Term  Effect Std. Error z value   Pr(&gt;|z|)   2.5 %  97.5 %</span>
-<span class="co">#&gt; 1     link  mpg 0.30703    0.11484 2.67349  0.0075066 0.08194 0.53211</span>
-<span class="co">#&gt; 2 response  mpg 0.04649    0.00886 5.24910 1.5285e-07 0.02913 0.06384</span>
+<span class="co">#&gt; 1     link  mpg 0.30703   0.114842   2.673  0.0075066 0.08194 0.53211</span>
+<span class="co">#&gt; 2 response  mpg 0.04649   0.008856   5.249 1.5285e-07 0.02913 0.06384</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Model type:  glm </span>
 <span class="co">#&gt; Prediction type:  response link</span></code></pre></div>
